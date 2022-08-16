@@ -8,7 +8,7 @@ body {
     background-color: #eef9bf;   
 }
 
-.jogo h1 {
+h1 {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 56px;
@@ -19,16 +19,16 @@ body {
     margin-bottom: 47px;
 }
 
-.jogo ul {
+.game {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.jogo ul li {
+.game__cards {
     width: 117px;
     height: 146px;
-    background-color: #a7e9af;
+    background-color: #a7e9af;    
     border: 1px solid #99cea8;
     border-radius: 5px;
     margin: 0 34px 34px 34px;
@@ -38,13 +38,13 @@ body {
     align-items: center;
 }
 
-.jogo ul li img {
+.game__cards img {
     width: 100px;
     height: 100px;
 }
 
 @media screen and (max-width: 335px) {
-    .jogo h1 {
+    h1 {
         font-size: 36px;
     }
 }
