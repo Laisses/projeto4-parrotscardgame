@@ -25,20 +25,44 @@ h1 {
     flex-wrap: wrap;
 }
 
-.game__cards {
+.card {
     width: 117px;
-    height: 146px;
-    background-color: #a7e9af;    
-    border: 1px solid #99cea8;
-    border-radius: 5px;
+    height: 146px;   
     margin: 0 34px 34px 34px;
-
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
-.game__cards img {
+.card__face {
+    width: 100%;
+    height: 100%;
+    background-color: #a7e9af;    
+    border: 1px solid #99cea8;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+}
+
+.card__face--back {
+    transform: rotateY(180deg);
+}
+
+.card:hover .card__face--back {
+    transform: rotateY(0deg);
+}
+
+.card:hover .card__face--front {
+    transform: rotateY(-180deg);
+}
+
+.card img {
     width: 100px;
     height: 100px;
 }
