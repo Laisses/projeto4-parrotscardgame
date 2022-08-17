@@ -33,8 +33,14 @@ h1 {
     justify-content: center;
     align-items: center;
     position: relative;
+    transform-style: preserve-3d;
+    transition: all .5s;
 }
 
+.card img {
+    width: 100px;
+    height: 100px;
+}
 .card__face {
     width: 100%;
     height: 100%;
@@ -45,26 +51,15 @@ h1 {
     align-items: center;
     justify-content: center;
     position: absolute;
-    backface-visibility: hidden;
-    transition: all .5s;
-    transform-style: preserve-3d;
+    backface-visibility: hidden;    
 }
 
-.card__face--back {
+.card__face--front {
     transform: rotateY(180deg);
 }
 
-.card:hover .card__face--back {
-    transform: rotateY(0deg);
-}
-
-.card:hover .card__face--front {
-    transform: rotateY(-180deg);
-}
-
-.card img {
-    width: 100px;
-    height: 100px;
+.rotate {
+    transform: rotateY(180deg);
 }
 
 @media screen and (max-width: 335px) {
