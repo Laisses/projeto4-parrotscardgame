@@ -20,7 +20,7 @@ const randomizeCards = (array) => array.sort(() => Math.random() - 0.5);
 const generateCard = () => {
     const gameBoard = document.querySelector(".game");
     const cardsInfo = randomizeCards(getsCardsInfo());
-    
+
     cardsInfo.forEach(item => {
         const card = document.createElement("div");
         const front = document.createElement("div");
@@ -34,7 +34,7 @@ const generateCard = () => {
         front.classList.add("card__face--front");
         back.classList.add("card__face--back");
 
-        card.dataset.parrot = item.cardName;
+        card.setAttribute("data-parrot", item.cardName);
         frontImg.src = item.frontSrc;
         backImg.src = "./assets/front.png";
         
@@ -48,9 +48,32 @@ const generateCard = () => {
 
 generateCard();
 
-const rotateCards = (e) => {    
+const checkCards = (target) => {
+    const flippedCard = target;
+    flippedCard.classList.add("flipped");
+
+    const flippedCards = document.querySelectorAll(".flipped");
+
+    if (flippedCards.length === 2) {
+        if (flippedCards[0].getAttribute("data-parrot") === flippedCards[1].getAttribute("data-parrot")) {           
+            flippedCards.forEach(card => {
+                card.classList.remove("flipped");
+                card.classList.add("not-clickable");
+            });
+        } else {
+            flippedCards.forEach(card => {
+                card.classList.remove("flipped");
+                setTimeout(() => card.classList.remove("rotate"), 1000);
+            });
+        };
+    };
+};
+
+const rotateCards = (e) => {
     const event = e.currentTarget;
     event.classList.toggle("rotate");
+    checkCards(event);
 }
 
-document.querySelectorAll(".card").forEach(cards => cards.onclick = rotateCards); 
+document.querySelectorAll(".card").forEach(cards => cards.onclick = rotateCards);
+
