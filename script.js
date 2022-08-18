@@ -48,11 +48,18 @@ const generateCard = () => {
 
 generateCard();
 
+const gameOver = () => {
+    const matchedCards = document.querySelectorAll(".not-clickable");
+    if (matchedCards.length === 14) {
+        alert("Acabou o jogo!");
+    }
+}
+
 const checkCards = (target) => {
     const flippedCard = target;
     flippedCard.classList.add("flipped");
 
-    const flippedCards = document.querySelectorAll(".flipped");
+    const flippedCards = document.querySelectorAll(".flipped");    
 
     if (flippedCards.length === 2) {
         if (flippedCards[0].getAttribute("data-parrot") === flippedCards[1].getAttribute("data-parrot")) {           
@@ -67,6 +74,8 @@ const checkCards = (target) => {
             });
         };
     };
+
+    setTimeout(() => gameOver(), 500);
 };
 
 const rotateCards = (e) => {
