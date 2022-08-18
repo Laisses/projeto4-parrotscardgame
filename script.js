@@ -15,9 +15,11 @@ const getsCardsInfo = () => [
     {frontSrc: "./assets/unicornparrot.gif", cardName: "unicorn"},
 ];
 
+const randomizeCards = (array) => array.sort(() => Math.random() - 0.5);
+
 const generateCard = () => {
     const gameBoard = document.querySelector(".game");
-    const cardsInfo = getsCardsInfo();
+    const cardsInfo = randomizeCards(getsCardsInfo());
     
     cardsInfo.forEach(item => {
         const card = document.createElement("div");
@@ -41,8 +43,7 @@ const generateCard = () => {
         card.appendChild(front);
         card.appendChild(back);
         gameBoard.appendChild(card);
-    });    
-    console.log(gameBoard);
+    });
 };
 
 generateCard();
