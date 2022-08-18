@@ -48,8 +48,9 @@ const generateCard = (n) => {
 const gameOver = () => {
     const cards = document.querySelectorAll(".card");
     const matchedCards = document.querySelectorAll(".not-clickable");
+   
     if (matchedCards.length === cards.length) {
-        alert("Acabou o jogo!");
+        alert(`Você ganhou em ${count} jogadas`);
     }
 }
 
@@ -76,6 +77,15 @@ const checkCards = (target) => {
     setTimeout(() => gameOver(), 500);
 };
 
+let count = 0;
+const clickCounter = () => {
+    const cards = document.querySelectorAll(".card");    
+
+    cards.forEach(card => card.addEventListener("click", () => {
+        count += 1;
+    }));
+}
+
 const rotateCards = (e) => {
     const event = e.currentTarget;
     event.classList.toggle("rotate");
@@ -86,11 +96,11 @@ const initializeGame = () => {
     const numberOfCards = prompt("Com quantas cartas você quer jogar? Escolha um número par entre 4 e 14");
     if (numberOfCards >= 4 && numberOfCards <= 14 && numberOfCards % 2 === 0) {
         generateCard(numberOfCards);
+        clickCounter();
     } else {
         return initializeGame();
     }
 }
+
 initializeGame();
-
 document.querySelectorAll(".card").forEach(cards => cards.onclick = rotateCards);
-
