@@ -1,25 +1,24 @@
 const getsCardsInfo = () => [
     {frontSrc: "./assets/bobrossparrot.gif", cardName: "bobross"},
-    {frontSrc: "./assets/explodyparrot.gif", cardName: "explody"},    
-    {frontSrc: "./assets/fiestaparrot.gif", cardName: "fiesta"},
-    {frontSrc: "./assets/metalparrot.gif", cardName: "metal"},
-    {frontSrc: "./assets/revertitparrot.gif", cardName: "revertit"},
-    {frontSrc: "./assets/tripletsparrot.gif", cardName: "triplets"},
-    {frontSrc: "./assets/unicornparrot.gif", cardName: "unicorn"},
     {frontSrc: "./assets/bobrossparrot.gif", cardName: "bobross"},
-    {frontSrc: "./assets/explodyparrot.gif", cardName: "explody"},    
+    {frontSrc: "./assets/explodyparrot.gif", cardName: "explody"},
+    {frontSrc: "./assets/explodyparrot.gif", cardName: "explody"},
+    {frontSrc: "./assets/fiestaparrot.gif", cardName: "fiesta"},
     {frontSrc: "./assets/fiestaparrot.gif", cardName: "fiesta"},
     {frontSrc: "./assets/metalparrot.gif", cardName: "metal"},
+    {frontSrc: "./assets/metalparrot.gif", cardName: "metal"},
+    {frontSrc: "./assets/revertitparrot.gif", cardName: "revertit"},
     {frontSrc: "./assets/revertitparrot.gif", cardName: "revertit"},
     {frontSrc: "./assets/tripletsparrot.gif", cardName: "triplets"},
-    {frontSrc: "./assets/unicornparrot.gif", cardName: "unicorn"},
+    {frontSrc: "./assets/tripletsparrot.gif", cardName: "triplets"}, 
+    {frontSrc: "./assets/unicornparrot.gif", cardName: "unicorn"},{frontSrc: "./assets/unicornparrot.gif", cardName: "unicorn"},
 ];
 
 const randomizeCards = (array) => array.sort(() => Math.random() - 0.5);
 
-const generateCard = () => {
+const generateCard = (n) => {
     const gameBoard = document.querySelector(".game");
-    const cardsInfo = randomizeCards(getsCardsInfo());
+    const cardsInfo = randomizeCards(getsCardsInfo().slice(0, n));
 
     cardsInfo.forEach(item => {
         const card = document.createElement("div");
@@ -46,11 +45,10 @@ const generateCard = () => {
     });
 };
 
-generateCard();
-
 const gameOver = () => {
+    const cards = document.querySelectorAll(".card");
     const matchedCards = document.querySelectorAll(".not-clickable");
-    if (matchedCards.length === 14) {
+    if (matchedCards.length === cards.length) {
         alert("Acabou o jogo!");
     }
 }
@@ -83,6 +81,16 @@ const rotateCards = (e) => {
     event.classList.toggle("rotate");
     checkCards(event);
 }
+
+const initializeGame = () => {
+    const numberOfCards = prompt("Com quantas cartas você quer jogar? Escolha um número par entre 4 e 14");
+    if (numberOfCards >= 4 && numberOfCards <= 14 && numberOfCards % 2 === 0) {
+        generateCard(numberOfCards);
+    } else {
+        return initializeGame();
+    }
+}
+initializeGame();
 
 document.querySelectorAll(".card").forEach(cards => cards.onclick = rotateCards);
 
