@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Roboto:wght@700&display=swap');
 
 body {
     background-color: #eef9bf;   
@@ -15,7 +15,6 @@ h1 {
     color: #75b79e;
     text-align: center;
     text-transform: uppercase;
-    margin-top: 40px;
     margin-bottom: 47px;
 }
 
@@ -66,8 +65,36 @@ h1 {
     pointer-events: none;
 }
 
+.timer {
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.timer__clock {
+    width: 80px;
+    height: 80px;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 26px;
+    margin: 5px 20px;
+    color: #AD6A63;
+    background-color: white;
+    border: 3px solid #FAAFA7;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 335px) {
     h1 {
         font-size: 36px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .timer {
+        width: 100%;
     }
 }

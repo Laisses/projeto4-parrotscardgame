@@ -52,6 +52,7 @@ const gameOver = () => {
    
     if (matchedCards.length === cards.length) {
         alert(`Você ganhou em ${count} jogadas`);
+        clearInterval(id);
         restartGame();
     };
 };
@@ -110,12 +111,22 @@ const clickCounter = () => {
     }));
 };
 
+let time = 0;
+let id;
+const startTimer = () => {
+    const clock = document.querySelector(".timer__clock");
+    time++;
+    clock.innerText = time;
+}
+
 const initializeGame = () => {
     const numberOfCards = prompt("Com quantas cartas você quer jogar? Escolha um número par entre 4 e 14");
     if (numberOfCards >= 4 && numberOfCards <= 14 && numberOfCards % 2 === 0) {
         generateCard(numberOfCards);
         count = 0;
+        time = 0;
         clickCounter();
+        id = setInterval(startTimer, 1000);
     } else {
         return initializeGame();
     };
