@@ -41,6 +41,7 @@ const generateCard = (n) => {
         back.appendChild(backImg);
         card.appendChild(front);
         card.appendChild(back);
+        card.onclick = rotateCards;
         gameBoard.appendChild(card);
     });
 };
@@ -51,7 +52,17 @@ const gameOver = () => {
    
     if (matchedCards.length === cards.length) {
         alert(`Você ganhou em ${count} jogadas`);
-    }
+        restartGame();
+    };
+};
+
+const restartGame = () => {
+    const reply = (prompt("Você quer jogar de novo?") || "").toLowerCase();
+
+    if (reply === "sim") {
+        document.querySelector(".game").innerHTML = "";
+        initializeGame();
+    };
 };
 
 const rotateCards = (e) => {
@@ -59,7 +70,7 @@ const rotateCards = (e) => {
     const flipped = document.querySelectorAll(".flipped");
     if (flipped.length === 2) {
         return;
-    }
+    };
     event.classList.toggle("rotate");
     checkCards(event);
 };
@@ -103,11 +114,11 @@ const initializeGame = () => {
     const numberOfCards = prompt("Com quantas cartas você quer jogar? Escolha um número par entre 4 e 14");
     if (numberOfCards >= 4 && numberOfCards <= 14 && numberOfCards % 2 === 0) {
         generateCard(numberOfCards);
+        count = 0;
         clickCounter();
     } else {
         return initializeGame();
-    }
+    };
 };
 
 initializeGame();
-document.querySelectorAll(".card").forEach(cards => cards.onclick = rotateCards);
