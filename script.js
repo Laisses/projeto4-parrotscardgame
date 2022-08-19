@@ -36,7 +36,7 @@ const generateCard = (n) => {
         card.setAttribute("data-parrot", item.cardName);
         frontImg.src = item.frontSrc;
         backImg.src = "./assets/front.png";
-        
+
         front.appendChild(frontImg);
         back.appendChild(backImg);
         card.appendChild(front);
@@ -49,7 +49,7 @@ const generateCard = (n) => {
 const gameOver = () => {
     const cards = document.querySelectorAll(".card");
     const matchedCards = document.querySelectorAll(".not-clickable");
-   
+
     if (matchedCards.length === cards.length) {
         alert(`Você ganhou em ${count} jogadas`);
         clearInterval(id);
@@ -77,10 +77,10 @@ const rotateCards = (e) => {
 };
 
 const checkCards = (target) => {
-    
+
     const flippedCard = target;
     flippedCard.classList.add("flipped");
-    
+
     const flippedCards = document.querySelectorAll(".flipped");
 
     if (flippedCards.length === 2) {
@@ -117,7 +117,7 @@ const startTimer = () => {
     const clock = document.querySelector(".timer__clock");
     time++;
     clock.innerText = time;
-}
+};
 
 const initializeGame = () => {
     const numberOfCards = prompt("Com quantas cartas você quer jogar? Escolha um número par entre 4 e 14");
