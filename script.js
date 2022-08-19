@@ -68,6 +68,10 @@ const restartGame = () => {
 
 const rotateCards = (e) => {
     const event = e.currentTarget;
+    if (id === null) {
+        id = setInterval(startTimer, 1000);
+    }
+
     const flipped = document.querySelectorAll(".flipped");
     if (flipped.length === 2) {
         return;
@@ -112,7 +116,7 @@ const clickCounter = () => {
 };
 
 let time = 0;
-let id;
+let id = null;
 const startTimer = () => {
     const clock = document.querySelector(".timer__clock");
     time++;
@@ -120,13 +124,14 @@ const startTimer = () => {
 };
 
 const initializeGame = () => {
+    document.querySelector(".timer__clock").innerText = 0;
     const numberOfCards = prompt("Com quantas cartas você quer jogar? Escolha um número par entre 4 e 14");
     if (numberOfCards >= 4 && numberOfCards <= 14 && numberOfCards % 2 === 0) {
         generateCard(numberOfCards);
         count = 0;
         time = 0;
+        id = null;
         clickCounter();
-        id = setInterval(startTimer, 1000);
     } else {
         return initializeGame();
     };
