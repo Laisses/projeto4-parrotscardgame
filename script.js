@@ -52,13 +52,24 @@ const gameOver = () => {
     if (matchedCards.length === cards.length) {
         alert(`Você ganhou em ${count} jogadas`);
     }
-}
+};
+
+const rotateCards = (e) => {
+    const event = e.currentTarget;
+    const flipped = document.querySelectorAll(".flipped");
+    if (flipped.length === 2) {
+        return;
+    }
+    event.classList.toggle("rotate");
+    checkCards(event);
+};
 
 const checkCards = (target) => {
+    
     const flippedCard = target;
     flippedCard.classList.add("flipped");
-
-    const flippedCards = document.querySelectorAll(".flipped");    
+    
+    const flippedCards = document.querySelectorAll(".flipped");
 
     if (flippedCards.length === 2) {
         if (flippedCards[0].getAttribute("data-parrot") === flippedCards[1].getAttribute("data-parrot")) {           
@@ -68,8 +79,10 @@ const checkCards = (target) => {
             });
         } else {
             flippedCards.forEach(card => {
-                card.classList.remove("flipped");
-                setTimeout(() => card.classList.remove("rotate"), 1000);
+                setTimeout(() => {
+                    card.classList.remove("flipped");
+                    card.classList.remove("rotate");
+                }, 1000);
             });
         };
     };
@@ -84,13 +97,7 @@ const clickCounter = () => {
     cards.forEach(card => card.addEventListener("click", () => {
         count += 1;
     }));
-}
-
-const rotateCards = (e) => {
-    const event = e.currentTarget;
-    event.classList.toggle("rotate");
-    checkCards(event);
-}
+};
 
 const initializeGame = () => {
     const numberOfCards = prompt("Com quantas cartas você quer jogar? Escolha um número par entre 4 e 14");
@@ -100,7 +107,7 @@ const initializeGame = () => {
     } else {
         return initializeGame();
     }
-}
+};
 
 initializeGame();
 document.querySelectorAll(".card").forEach(cards => cards.onclick = rotateCards);
